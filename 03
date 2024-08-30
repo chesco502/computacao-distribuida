@@ -1,0 +1,58 @@
+
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <mutex>
+
+std::mutex mtx;
+int I=1000;
+// Função que será executada pelas threads
+
+void operacoes(){
+    std::lock_guard<std::mutex> lock(mtx);
+    for(int i = 0; i < 1000 ; i++){
+        I+=5;
+        
+        
+    }
+    
+    
+    
+    for(int i = 0; i < 1000 ; i++){
+        I-=5;
+        
+        
+    }
+}
+
+void printThreadId(int id) {
+    
+    for(int i = 0; i < 1000 ; i++){
+      operacoes();
+        
+        
+    }
+    
+    
+    
+}
+
+int main() {
+    const int numThreads = 5;  // Número de threads que queremos criar
+    std::vector<std::thread> threads;  // Vetor para armazenar os objetos thread
+
+    // Criando e iniciando as threads
+    for (int i = 0; i < numThreads; ++i) {
+        threads.emplace_back(printThreadId, i);
+    }
+    
+    // Esperando todas as threads terminarem
+    for (auto& thread : threads) {
+        if (thread.joinable()) {
+            thread.join();
+        }
+    }
+
+    std::cout << "extrato final : " << I << std::endl;
+    return 0;
+}
