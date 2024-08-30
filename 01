@@ -1,0 +1,30 @@
+
+#include <iostream>
+
+int I=1000;
+
+void operacoes(){
+    for(int i = 0; i < 1000 ; i++){
+        I+=5;
+        
+        
+    }
+    
+    
+    
+    for(int i = 0; i < 1000 ; i++){
+        I-=5;
+        
+        
+    }
+}
+int main()
+{
+   for(int i = 0; i < 5000 ; i++){
+      operacoes();
+        
+        
+    }
+    std::cout << "extrato final : " << I << std::endl;
+    return 0;
+}
